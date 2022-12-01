@@ -65,7 +65,7 @@
         <string>муж</string>
        </property>
       </widget>
-      <widget class="QRadioButton" name="radioButton_2">
+      <widget class="QRadioButton" name="rbFamale">
        <property name="text">
         <string>жен</string>
        </property>
@@ -100,7 +100,7 @@
      </widget>
     </item>
     <item row="4" column="1">
-     <widget class="QLineEdit" name="lineEdit_3"/>
+     <widget class="QLineEdit" name="leEmail"/>
     </item>
     <item row="5" column="0">
      <widget class="QLabel" name="label_6">
@@ -110,7 +110,7 @@
      </widget>
     </item>
     <item row="5" column="1">
-     <widget class="QComboBox" name="comboBox"/>
+     <widget class="QComboBox" name="cbPost"/>
     </item>
     <item row="6" column="0">
      <widget class="QLabel" name="label_7">
@@ -157,7 +157,7 @@
     </item>
    </layout>
   </widget>
-  <zorder>radioButton_2</zorder>
+  <zorder>rbFamale</zorder>
   <zorder>rbMale</zorder>
   <zorder>twStaffs</zorder>
   <zorder>label</zorder>
@@ -169,9 +169,9 @@
   <zorder>label_7</zorder>
   <zorder>leFio</zorder>
   <zorder>lePhone</zorder>
-  <zorder>lineEdit_3</zorder>
+  <zorder>leEmail</zorder>
   <zorder>spAge</zorder>
-  <zorder>comboBox</zorder>
+  <zorder>cbPost</zorder>
   <zorder>spAge_2</zorder>
   <zorder>pbOpen</zorder>
   <zorder>pbInsert</zorder>

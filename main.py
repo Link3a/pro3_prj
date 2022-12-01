@@ -4,11 +4,15 @@ import sys
 from PyQt5.QtWidgets import QApplication, QWidget, QTableWidgetItem
 from Form_staff import Ui_Form
 
+STAFF_POSTS = ['бухгалтер', 'менеджер', 'программист']
+
 class MyWidget(QWidget, Ui_Form):
     def __init__(self):
         super(MyWidget, self).__init__()
         self.setupUi(self)
+        self.cbPost.addItems(STAFF_POSTS)
         self.pbOpen.clicked.connect(self.open_file)
+        self.pbInsert.clicked.connect(self.insert_file)
 
 
     def open_file(self):
@@ -29,6 +33,20 @@ class MyWidget(QWidget, Ui_Form):
             for j, elem in enumerate(row):
                 self.twStaffs.setItem(i, j, QTableWidgetItem(str(elem)))
         self.twStaffs.resizeColumnsToContents()
+
+    def insert_file(self):
+        row = [self.leFio.text(), 'муж' if self.rbMale.isChecked() else 'жен', self.spAge.text(),
+               self.lePhone.text(), self.leEmail.text(), self.cbPost.itemText(self.cbPost.currentIndex()),
+               self.spAge_2.text()]
+        try:
+            cur = self.conn.cursor()
+            cur.execute(f"""insert into staff(fio, sex, age, phone, email, position, exp)
+            values('{row[0]}', '{row[1]}', {row[2]}, '{row[3]}', '{row[4]}', '{row[5]}', {row[6]})""")
+            self.conn.commit()
+            cur.close()
+        except Exception as e:
+            print(f"Исключение: {e}")
+            return e
 
 
 
