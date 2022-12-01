@@ -34,6 +34,21 @@ class MyWidget(QWidget, Ui_Form):
                 self.twStaffs.setItem(i, j, QTableWidgetItem(str(elem)))
         self.twStaffs.resizeColumnsToContents()
 
+    def update_twStaffs(self, query="select * from staff"):
+        try:
+            cur = self.conn.cursor()
+            data = cur.execute(query).fetchall()
+        except Exception as e:
+            print(f"Проблемы с подключением к БД. {e}")
+            return e
+        self.twStaffs.setRowCount(0)
+        for i, row in enumerate(data):
+            self.twStaffs.setRowCount(self.twStaffs.rowCount() + 1)
+            for j, elem in enumerate(row):
+                self.twStaffs.setItem(i, j, QTableWidgetItem(str(elem)))
+        self.twStaffs.resizeColumnsToContents()
+
+
     def insert_file(self):
         row = [self.leFio.text(), 'муж' if self.rbMale.isChecked() else 'жен', self.spAge.text(),
                self.lePhone.text(), self.leEmail.text(), self.cbPost.itemText(self.cbPost.currentIndex()),
@@ -47,7 +62,7 @@ class MyWidget(QWidget, Ui_Form):
         except Exception as e:
             print(f"Исключение: {e}")
             return e
-
+        self.update_twStaffs()
 
 
 if __name__ == '__main__':
