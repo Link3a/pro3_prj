@@ -4,14 +4,14 @@ import sys
 from PyQt5.QtWidgets import QApplication, QWidget, QTableWidgetItem
 from Form_staff import Ui_Form
 
-
-class MуWidget(QWidget, Ui_Form):
+class MyWidget(QWidget, Ui_Form):
     def __init__(self):
         super(MyWidget, self).__init__()
         self.setupUi(self)
-        self.pbOpen.clicked.connect(self.open)
+        self.pbOpen.clicked.connect(self.open_file)
 
-    def open(self):
+
+    def open_file(self):
         try:
             self.conn = sqlite3.connect('staff_db.db')
             cur = self.conn.cursor()
@@ -22,13 +22,14 @@ class MуWidget(QWidget, Ui_Form):
             print("Ошибки подключением к БД")
             return e
         self.twStaffs.setColumnCount(len(col_name))
-        self.twStaffs.setHorizontalHeader(col_name)
+        self.twStaffs.setHorizontalHeaderLabels(col_name)
         self.twStaffs.setRowCount(0)
         for i, row in enumerate(data_rows):
-            self.twStaffs.setRowCount(self.twStaffs.rowCount() + 1)
+            self.twStaffs.setRowCount(self.twStaffs.rowCount()+1)
             for j, elem in enumerate(row):
                 self.twStaffs.setItem(i, j, QTableWidgetItem(str(elem)))
         self.twStaffs.resizeColumnsToContents()
+
 
 
 if __name__ == '__main__':
@@ -36,3 +37,4 @@ if __name__ == '__main__':
     ex = MyWidget()
     ex.show()
     sys.exit(app.exec_())
+

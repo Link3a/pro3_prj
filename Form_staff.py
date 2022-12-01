@@ -9,12 +9,9 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QTableWidget
 
 
 class Ui_Form(object):
-    twStaffs: QTableWidget
-
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(680, 453)
